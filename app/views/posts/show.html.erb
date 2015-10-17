@@ -1,5 +1,23 @@
 <h1><%= @post.name %></h1>
 
+<% if @post.contents.any? %>
+  <ul>
+    <% @post.contents.each do |contnet| %>
+    <li>
+      <%= task.description %> |
+        <%= link_to "Edit", edit_post_content_path(@post, content) %> |
+        <%= link_to "Delete", post_content_path(@post, content),
+                                 :data => {:confirm => "Are you sure you want to delete all of this fantastical content?",
+                                                :method => "delete"} %>                                   </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>This post has no content yet!</p>
+<% end %>
+
+<p><%= link_to "Return to Posts", posts_path %></p>
+
+
 <p><%= link_to "Home", posts_path %></p>
 <p><%= link_to "Edit", edit_post_path(@post) %></p>
 <p><%= link_to "Delete", post_path(@post),

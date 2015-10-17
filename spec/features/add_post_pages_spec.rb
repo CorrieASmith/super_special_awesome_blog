@@ -8,4 +8,10 @@ describe "the add a post process" do
     click_on 'Create Post'
     expect(page).to have_content 'Post'
   end
+
+  it "displays error message when post is not properly added" do
+    visit new_post_path
+    click_on 'Create Post'
+    expect(page).to have_content 'errors'
+  end
 end

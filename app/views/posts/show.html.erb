@@ -6,11 +6,12 @@
   <ul>
     <% @post.contents.each do |content| %>
     <li>
-      <%= content.description %> |
+      <%= content.description %> 
+        <% if current_user %> |
         <%= link_to "Edit", edit_post_content_path(@post, content) %> |
         <%= link_to "Delete", post_content_path(@post, content),
                                  :data => {:confirm => "Are you sure you want to delete all of this fantastical content?",
-                                                :method => "delete"} %>                                   </li>
+                                                :method => "delete"} %>                                   </li><% end %>
     <% end %>
   </ul>
 
@@ -20,11 +21,16 @@
   <% end %>
 
 <br>
-<p><%= link_to "Add Content", new_post_content_path(@post) %></p>
+
+<% if current_user %>
+  <p><%= link_to "Add Content", new_post_content_path(@post) %></p>
 
 
-<p><%= link_to "Edit", edit_post_path(@post) %></p>
-<p><%= link_to "Delete", post_path(@post),
-                         :data => {:confirm => "Are you sure you want to delete this fantastical post?",
-                                   :method => "delete"} %></p>
-<p><%= link_to "Return to Posts", "/" %></p>
+  <p><%= link_to "Edit", edit_post_path(@post) %></p>
+  <p><%= link_to "Delete", post_path(@post),
+                           :data => {:confirm => "Are you sure you want to delete this fantastical post?",
+                                     :method => "delete"} %></p>
+  <p><%= link_to "Return to Posts", "/" %></p>
+<% else %>
+  <p><%= link_to "Return to Posts", "/" %></p>
+<% end %>

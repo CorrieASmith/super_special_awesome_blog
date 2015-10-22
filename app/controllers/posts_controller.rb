@@ -1,7 +1,6 @@
 class PostsController < ApplicationController
   def index
     @posts = Post.all
-    render :index
   end
 
   def show
@@ -18,7 +17,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     if @post.save
       flash[:notice] = "Your post was submittted successfully!"
-      redirect_to posts_path
+      redirect_to "/"
     else
       render:new
     end
@@ -32,7 +31,7 @@ class PostsController < ApplicationController
   def update
     @post = Post.find(params[:id])
     if @post.update(post_params)
-      redirect_to posts_path
+      redirect_to "/"
     else
       render :edit
     end
@@ -41,7 +40,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find(params[:id])
     @post.destroy
-    redirect_to posts_path
+    redirect_to "/"
   end
 
   private
